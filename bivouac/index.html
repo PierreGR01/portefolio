@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Bivouac — UX &amp; Product Design for Outdoor Safety | Pierre Grambert</title>
-  <meta name="description" content="A long-term UX and product design project for responsible mountain bivouac. Combines field research, user interviews with PGHM Chamonix and ARVA, Figma prototyping, and Figma Make exploration. Solo project, 2018–2026." />
+  <title>Bivouac — Product Design Case Study: Mapping Mountain Regulations | Pierre Grambert</title>
+  <meta name="description" content="Product design case study by Pierre Grambert. How a solo designer took Bivouac from field research to a live platform mapping bivouac regulations across French mountains: system design, multi-stakeholder governance, geospatial UX and AI-assisted development." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Bivouac — UX &amp; Product Design for Outdoor Safety" />
-  <meta property="og:description" content="A long-term UX and product design project combining field research, user interviews, and high-fidelity prototyping for responsible outdoor practice." />
+  <meta property="og:title" content="Bivouac — Product Design Case Study by Pierre Grambert" />
+  <meta property="og:description" content="From master's thesis to a live product. Field research, system design, institutional governance and geospatial UX for mountain bivouac in France." />
   <meta property="og:image" content="../assets/images/bivouac/IMAGE_01.png" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://www.pierregrambert.fr/bivouac/" />
@@ -252,6 +252,18 @@
       margin-bottom: 20px;
     }
 
+    /* Extension — secondary title line under the h1, when the full
+       name is split into a short mark ("Bivouac") and a tagline */
+    .hero-tagline {
+      font-family: "Titillium Web", sans-serif;
+      font-size: 20px;
+      font-weight: 200;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+      color: rgb(200, 200, 205);
+      margin-bottom: 20px;
+    }
+
     .hero-subtitle {
       font-family: Inter, sans-serif;
       font-size: 16px;
@@ -363,6 +375,70 @@
       text-transform: uppercase;
     }
 
+    /* Extension — real images (SVG diagrams) served as files, sized to
+       the standard figure width with automatic height */
+    .figure-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: zoom-in;
+    }
+
+    /* Extension — modifier for figures that would otherwise render too
+       tall in a two-column grid (e.g. portrait mobile screenshots) */
+    .figure-image--compact {
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    /* Extension — fullscreen lightbox for clicking a figure image */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(10, 12, 20, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-overlay.is-active {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      cursor: default;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(130, 225, 255, 0.4);
+      background: rgba(10, 12, 20, 0.6);
+      color: rgb(220, 235, 245);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(130, 225, 255, 0.12);
+    }
+
     figure {
       margin: 0;
     }
@@ -382,6 +458,29 @@
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-top: 40px;
+    }
+
+    /* Extension — modifier for a figure-grid pairing a portrait and a
+       landscape image, so both render at roughly the same height
+       instead of the portrait one dictating an oversized row */
+    .figure-grid--05 {
+      grid-template-columns: 1fr 4.2fr;
+    }
+
+    /* Extension — floats a figure so the surrounding paragraphs (and
+       narrow blocks like a callout or blockquote) wrap around it
+       instead of being paired with a single paragraph in a grid
+       column, which left blank space once that paragraph ran shorter
+       than the image. Multi-column grids never wrap well at reduced
+       width, so those clear the float and start on their own line. */
+    .figure--float {
+      float: right;
+      width: 45%;
+      margin: 0 0 24px 40px;
+    }
+
+    .decisions-grid {
+      clear: both;
     }
 
     /* ─────────────────────────────────────────────────────────
@@ -485,6 +584,12 @@
       line-height: 1.75;
     }
 
+    /* Extension — spacing when a callout carries more than one
+       paragraph (introduced for the "What I want you to take" block) */
+    .callout p + p {
+      margin-top: 14px;
+    }
+
     /* ─────────────────────────────────────────────────────────
        Blockquote
     ───────────────────────────────────────────────────────── */
@@ -526,6 +631,10 @@
       margin-top: 32px;
     }
 
+    .decisions-grid--3col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
     .decision-card {
       border: 1px solid rgba(130, 225, 255, 0.14);
       padding: 28px 24px 32px;
@@ -562,6 +671,25 @@
       font-weight: 200;
       color: rgb(185, 185, 192);
       line-height: 1.65;
+    }
+
+    /* Extension — secondary annotation line at the end of a decision
+       card (introduced for the "Cost:" line), muted like figcaption */
+    .decision-card .card-cost {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(130, 225, 255, 0.10);
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      font-weight: 200;
+      font-style: italic;
+      color: rgb(150, 150, 158);
+      line-height: 1.6;
+    }
+
+    .decision-card .card-cost strong {
+      font-style: normal;
+      color: rgb(170, 170, 177);
     }
 
     /* ─────────────────────────────────────────────────────────
@@ -705,16 +833,28 @@
         letter-spacing: 3px;
       }
 
+      .hero-tagline {
+        font-size: 17px;
+      }
+
       .context-grid {
         grid-template-columns: 1fr;
         gap: 0;
       }
 
-      .decisions-grid {
+      .decisions-grid,
+      .decisions-grid--3col {
         grid-template-columns: 1fr;
       }
 
-      .figure-grid {
+      .figure--float {
+        float: none;
+        width: 100%;
+        margin: 0 0 24px;
+      }
+
+      .figure-grid,
+      .figure-grid--05 {
         grid-template-columns: 1fr;
       }
 
@@ -730,13 +870,32 @@
       .project-card   { flex: 0 0 50%; }
       .project-figure { height: 180px; }
 
+      /* Extension — the sticky-header nav on this page carries a longer
+         primary label ("Open the application") than the other case
+         studies; wrap it instead of overflowing at narrow widths */
+      .sticky-header__inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 16px;
+        row-gap: 8px;
+      }
+
+      .sticky-header__nav {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
       .container {
-        padding: 0 16px;
+        padding: 140px 16px 0;
       }
 
       .case-study__hero h1 {
         font-size: 19px;
         letter-spacing: 2px;
+      }
+
+      .hero-tagline {
+        font-size: 15px;
       }
 
       .hero-ctas {
@@ -773,7 +932,7 @@
     <div class="sticky-header__inner">
       <a href="../" class="site-name">← Pierre Grambert</a>
       <nav class="sticky-header__nav" aria-label="Page actions">
-        <a href="https://next-broad-43789019.figma.site" class="btn-sticky-primary" target="_blank" rel="noopener">Visit prototype <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <a href="https://bivouac-proto.vercel.app/" class="btn-sticky-primary" target="_blank" rel="noopener">Open the application <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         <a href="../kairn/" class="btn-sticky-secondary" aria-label="Kairn design project">Next project <span aria-hidden="true">→</span></a>
       </nav>
     </div>
@@ -788,22 +947,20 @@
         <header class="case-study__hero">
 
           <div class="hero-text">
-            <h1 itemprop="name">Bivouac — UX &amp; Product Design for Outdoor Safety</h1>
-            <p class="hero-subtitle" itemprop="description">A long-term product exploration combining field research, user interviews, and high-fidelity prototyping — from master's thesis to vibe coding experiment.</p>
+            <h1 itemprop="name">Bivouac</h1>
+            <p class="hero-tagline">Taking a complex public-data product from research to a live service</p>
+            <p class="hero-subtitle" itemprop="description">A solo product design project, carried from field interviews to a running application used to display bivouac regulations across the French mountains. The real challenge was holding institutional authority, computed data and field knowledge together in one system, without letting any of them undercut the others.</p>
 
             <ul class="tags" aria-label="Skills and tools">
-              <li>UX Design</li>
               <li>Product Design</li>
-              <li>User Research</li>
-              <li>Prototyping</li>
-              <li>Figma</li>
-              <li>Figma Make</li>
-              <li>Civic Tech</li>
+              <li>UX Research</li>
+              <li>Information Architecture</li>
+              <li>Geospatial &amp; Map UX</li>
+              <li>Design-first POC</li>
+              <li>AI-assisted development</li>
             </ul>
             <ul class="tags tags--meta" aria-label="Project meta">
-              <li>Solo project</li>
               <li>2018 → 2026</li>
-              <li>Personal / R&amp;D Camptocamp</li>
             </ul>
 
             <div class="hero-ctas">
@@ -813,13 +970,38 @@
 
           <div class="hero-image">
             <figure>
-              <div class="img-placeholder" data-id="IMAGE_01" style="aspect-ratio: 16/9;">
-                IMAGE_01 — Hero map screen
-              </div>
+              <img class="figure-image" data-id="IMAGE_01" src="../assets/build/BIVOUAC/IMAGE_01-map-regulation-layer.png" alt="Bivouac application, map of the Écrins area with regulated zones displayed as a layer">
+              <figcaption>Bivouac application, map of the Écrins area with regulated zones displayed as a layer</figcaption>
             </figure>
           </div>
 
         </header>
+
+        <hr class="section-divider">
+
+        <!-- ── Section 01b — What I want you to take from this project ── -->
+        <section id="takeaway" aria-labelledby="takeaway-heading" class="section-content">
+          <h2 id="takeaway-heading" class="section-heading">What I want you to take from this project</h2>
+
+          <p class="body-text">Three things, if you are reading this before deciding whether to talk to me.</p>
+
+          <div class="decisions-grid decisions-grid--3col">
+            <article class="decision-card">
+              <h3>I work well on products where the hard part sits in the model rather than in the screens.</h3>
+              <p>Bivouac looked like a map app and turned out to be a question about who has the authority to state a rule.</p>
+            </article>
+
+            <article class="decision-card">
+              <h3>I know how to reduce uncertainty before engineering gets involved.</h3>
+              <p>The 2025 phase of this project was run deliberately as a design-first proof of concept, and it changed the data model, the contribution mechanics and the governance approach before a single line of production code existed.</p>
+            </article>
+
+            <article class="decision-card">
+              <h3>I can carry something all the way to a running service.</h3>
+              <p>The V1 is online, code-audited and built with AI-assisted tooling, and it is now the object of real conversations with a national park, a national federation and a département.</p>
+            </article>
+          </div>
+        </section>
 
         <hr class="section-divider">
 
@@ -831,29 +1013,33 @@
             <div>
               <dl class="info-list">
                 <dt>Role</dt>
-                <dd>Solo — UX research, product strategy, UI design, prototyping</dd>
+                <dd>Solo across the whole chain. User research, product strategy, information architecture, UI design, design system, prototyping, and the V1 build itself.</dd>
 
                 <dt>Timeline</dt>
                 <dd>
                   <ul class="timeline-list">
-                    <li>2018 — Master's thesis: field research, interviews, initial design exploration</li>
-                    <li>2023 — Reboot: product direction, information architecture, Figma prototype</li>
-                    <li>2025–2026 — Vibe coding phase: Figma Make, Claude, pre-industrialization, R&amp;D at Camptocamp</li>
+                    <li>2018. Master's thesis. Field observation, interviews with mountain professionals, first framing of the product.</li>
+                    <li>2019 → 2024. Dormant. The concept held, the distance between a static mockup and a working service stayed too wide to cross alone.</li>
+                    <li>2025. Design-first POC in Figma Make, used to test the product model.</li>
+                    <li>2025 → 2026. V1 designed, built, code-audited, published. Association created, institutional outreach started.</li>
                   </ul>
                 </dd>
+
+                <dt>Tools</dt>
+                <dd>Figma · Figma Make · Claude Code · Next.js · TypeScript · Supabase · OpenStreetMap and Overpass API · INPN protected areas · IGN BD TOPO</dd>
               </dl>
             </div>
 
             <div>
               <dl class="info-list">
-                <dt>Tools</dt>
-                <dd>Figma · Figma Make · Claude · User interviews · Field observation</dd>
+                <dt>Stakeholders involved</dt>
+                <dd>Practitioners, land managers (national and regional parks, nature reserves), public authorities issuing local orders, and national federations.</dd>
 
                 <dt>Research partners</dt>
-                <dd>PGHM Chamonix (mountain rescue) · ARVA (avalanche safety equipment)</dd>
+                <dd>PGHM Chamonix (mountain rescue) and ARVA (avalanche safety equipment), during the 2018 phase.</dd>
 
-                <dt>Project type</dt>
-                <dd>Personal project / R&amp;D exploration at Camptocamp</dd>
+                <dt>Current status</dt>
+                <dd>V1 online. Authentication, GDPR compliance and hosting are the remaining items before a full public opening. Conversations under way with Parc national des Écrins, Conservatoire d'Espaces Naturels, FFRandonnée and Département de l'Isère.</dd>
               </dl>
             </div>
 
@@ -866,49 +1052,78 @@
         <section id="problem" aria-labelledby="problem-heading" class="section-content">
           <h2 id="problem-heading" class="section-heading">The problem</h2>
 
-          <p class="body-text">Most outdoor apps optimize for discovery and engagement — surfacing "best spots," rankings, user-generated tips. In a mountain bivouac context, that logic backfires: it accelerates overuse, damages fragile ecosystems, and breeds a consumer mindset that conflicts with how mountain communities think about safety and responsibility.</p>
+          <figure class="figure--float">
+            <img class="figure-image" data-id="IMAGE_02" src="../assets/build/BIVOUAC/IMAGE_02-regulatory-landscape.svg" alt="Mindmap showing the overlapping layers of French bivouac regulation, from national parks to municipal orders">
+            <figcaption>Mindmap showing the overlapping layers of French bivouac regulation, from national parks to municipal orders</figcaption>
+          </figure>
+
+          <p class="body-text">A hiker reaches a lake at seven in the evening, two hundred kilometres from home, and wants to know whether they can sleep there. The answer depends on which national park, regional park, nature reserve, prefectural order and municipal order overlap at that exact point. Each of those bodies publishes its rules through its own channel, in its own wording, at its own pace. Reconstructing that picture from a phone, on site, at dusk, is out of reach for almost everyone.</p>
+          <p class="body-text">So people fall back on what a photograph on social media suggested was possible. Sites like the lac de la Muzelle or the Lauvitel absorb far more visitors than their capacity allows, and land managers respond with quotas and tighter bans that affect everybody.</p>
+          <p class="body-text">Mainstream outdoor apps amplify that loop. Rankings, best-of lists and shareable locations concentrate traffic on a handful of fragile places while the rest of the range stays empty. Designing another discovery product would have made the situation worse.</p>
 
           <div class="callout">
-            <p>The challenge wasn't to build a smarter recommendation engine. It was to design a decision-support tool — one that makes fragmented, localized regulations accessible and actionable, without encouraging harmful behavior in the process.</p>
+            <p>The brief I set myself was narrower and harder: carry an existing rule to a non-local visitor at the moment they decide, and give the bodies who write those rules a way to speak for themselves inside the product.</p>
           </div>
-
-          <figure style="margin-top: 40px;">
-            <div class="img-placeholder" data-id="IMAGE_02" style="aspect-ratio: 16/9;">
-              IMAGE_02 — Research artifact or field photo
-            </div>
-            <figcaption>Field research, PGHM Chamonix interviews, 2018</figcaption>
-          </figure>
         </section>
 
         <hr class="section-divider">
 
-        <!-- ── Section 04 — Research & field work ── -->
+        <!-- ── Section 04 — Research and field work ── -->
         <section id="research" aria-labelledby="research-heading" class="section-content">
-          <h2 id="research-heading" class="section-heading">Research &amp; field work</h2>
+          <h2 id="research-heading" class="section-heading">Research and field work</h2>
 
-          <p class="body-text">Research combined direct field observation with semi-structured interviews. Conversations with actors from PGHM Chamonix (mountain rescue) and ARVA (avalanche safety equipment) shaped a clearer picture of how information circulates — and sometimes fails to — in high-stakes outdoor contexts.</p>
+          <figure class="figure--float">
+            <img class="figure-image" data-id="IMAGE_03" src="../assets/build/BIVOUAC/IMAGE_03-user-journey.svg" alt="User journey of a hiker planning and then arriving at a bivouac site, showing the moments where regulatory information is missing">
+            <figcaption>User journey</figcaption>
+          </figure>
 
-          <p class="body-text">Early work also surfaced a consistent pattern: regulations exist, but they are buried across dozens of jurisdictions with no consistent format, no unified access point, and no adaptation for mobile or field use.</p>
+          <p class="body-text"><strong>2018, understanding how information fails.</strong> Direct field observation combined with semi-structured interviews. Conversations with PGHM Chamonix and ARVA showed where information stops travelling in high-stakes outdoor contexts, and how much of a decision is made on habit and hearsay.</p>
 
           <blockquote>
-            <p>"Regulations exist — but users can't find them in time. The problem isn't access to rules, it's that rules are scattered across dozens of jurisdictions with no consistent format."</p>
-            <cite>Synthesized from field interviews, 2018</cite>
+            <p>"Regulations exist, and users still cannot find them in time. The problem is that they are scattered across dozens of jurisdictions with no consistent format."</p>
+            <cite>Synthesised from field interviews, 2018</cite>
           </blockquote>
 
-          <div class="figure-grid">
-            <figure>
-              <div class="img-placeholder" data-id="IMAGE_03a" style="aspect-ratio: 4/3;">
-                IMAGE_03a — Field/context photo
-              </div>
-              <figcaption>Mountain bivouac field context, Chamonix area</figcaption>
-            </figure>
-            <figure>
-              <div class="img-placeholder" data-id="IMAGE_03b" style="aspect-ratio: 4/3;">
-                IMAGE_03b — Research synthesis artifact
-              </div>
-              <figcaption>Research synthesis — fragmented bivouac regulations across French mountain jurisdictions</figcaption>
-            </figure>
+          <p class="body-text"><strong>2025, understanding the institutions.</strong> Reopening the project required a completely different research effort. I read actual prefectural orders, mapped which public datasets exist and what they genuinely describe, and spoke with the people who write and enforce the rules.</p>
+
+          <p class="body-text">That second pass produced the constraint that shaped everything afterwards. A platform that displays regulation inherits a question of authority, and the only workable answer is to let each land manager speak in their own name inside the tool.</p>
+
+          <p class="body-text"><strong>Artifacts produced:</strong> interview synthesis, regulatory landscape mapping, user journeys for the planning phase and the on-site phase, data source audit.</p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ── Section 04b — The system behind the map ── -->
+        <section id="system" aria-labelledby="system-heading" class="section-content">
+          <h2 id="system-heading" class="section-heading">The system behind the map</h2>
+
+          <figure class="figure--float">
+            <img class="figure-image" data-id="IMAGE_04" src="../assets/build/BIVOUAC/IMAGE_04-data-sources-and-natures.svg" alt="Diagram mapping the data sources behind Bivouac, from INPN protected areas, OpenStreetMap and prefectural orders to the three natures of information displayed in the app">
+            <figcaption>Data sources and the three natures of information</figcaption>
+          </figure>
+
+          <p class="body-text">The project started as a feature list: create a bivouac point, add a photo, report a water source, show the regulation. Building a working prototype showed how tightly those elements are coupled.</p>
+          <p class="body-text">Contribution changes governance. Automated data changes what the user is asked to do. Displaying regulation raises the question of who owns the statement. The product became a system in which data, contributors, institutions and outdoor practice interact continuously.</p>
+          <p class="body-text">The decisive move was to stop treating information as a single category. Three families emerged, each with its own reliability profile and its own claim on the interface.</p>
+
+          <div class="decisions-grid decisions-grid--3col">
+            <article class="decision-card">
+              <h3>Institutional data</h3>
+              <p>Regulated zones, protected areas, park boundaries. Carries authority, always attributed to the body that issued it.</p>
+            </article>
+
+            <article class="decision-card">
+              <h3>Computed data</h3>
+              <p>Geographic analysis derived from open datasets, for example water within a hundred metres, within two hundred, or nothing identified nearby. Instant, complete across the territory, and only ever a theoretical statement.</p>
+            </article>
+
+            <article class="decision-card">
+              <h3>Empirical data</h3>
+              <p>What a practitioner observed last weekend. Whether the spring was running, whether the ground was flat enough. Concrete, and always dated.</p>
+            </article>
           </div>
+
+          <p class="body-text" style="margin-top: 28px;">Naming those three families settled most of the arguments that followed. The interface stopped chasing a single version of the truth and started showing where each piece of knowledge comes from, which is also what makes it defensible to a park ranger.</p>
         </section>
 
         <hr class="section-divider">
@@ -917,95 +1132,117 @@
         <section id="design-decisions" aria-labelledby="decisions-heading" class="section-content">
           <h2 id="decisions-heading" class="section-heading">Design decisions</h2>
 
-          <p class="body-text">Every significant design decision was a deliberate departure from standard outdoor app patterns. The goal was to redesign the relationship between the user and official information — not to make discovery frictionless, but to make decision-making more reliable.</p>
+          <p class="body-text">Every decision below came out of a tension that only appeared once the system was running. Each one moved the product away from a standard outdoor app convention, and each one has a cost I accepted knowingly.</p>
 
           <div class="decisions-grid">
             <article class="decision-card">
               <span class="card-label">Decision 01</span>
-              <h3>No "secret spots" or ranking logic</h3>
-              <p>Removed all user-generated content and ranking features. The app surfaces only official sources — national parks, municipalities, prefectures — reducing virality risk while building trustworthiness.</p>
+              <h3>Contribution without a leaderboard</h3>
+              <p>Community contribution stayed in the product, because field knowledge has no substitute. Everything that turns contribution into competition came out: rankings, popularity scores, best-of lists. Practitioners document conditions, and the product never promotes a destination.</p>
+              <p class="card-cost"><strong>Cost:</strong> slower growth, and no viral mechanic to lean on.</p>
             </article>
 
             <article class="decision-card">
               <span class="card-label">Decision 02</span>
-              <h3>Regulation as a geographic UI layer</h3>
-              <p>Regulations are presented as a map layer, not a legal document. Users see what is allowed at their current location in real time — actionable, not advisory.</p>
+              <h3>Regulation as a map layer, with its source attached</h3>
+              <p>Regulation appears where the user stands, as a geographic layer. Every zone carries the issuing body, the nature of the protection, the applicable restrictions and a link to the official source. Strict prohibitions are drawn on the map. Moderate regimes, which would saturate the display, surface in the detail panel of any point that falls inside them.</p>
+              <p class="card-cost"><strong>Cost:</strong> two levels of display logic to maintain, and a harder onboarding for the map.</p>
             </article>
 
             <article class="decision-card">
               <span class="card-label">Decision 03</span>
-              <h3>Understanding over passive consumption</h3>
-              <p>The interface is designed to reduce ambiguity. Each regulation is displayed with its source, its geographic scope, and a plain-language summary — supporting judgment, not just compliance.</p>
+              <h3>Computed information where it helps, human information where it matters</h3>
+              <p>The original plan asked users to report nearby water. Open data made that unnecessary, since proximity to a spring or a stream can be derived automatically. That improved the experience and exposed a trade-off worth designing around, because a map knows a spring exists while only a person knows whether it is still running. Both are displayed, each labelled for what it is.</p>
+              <p class="card-cost"><strong>Cost:</strong> more interface work to keep the distinction legible without jargon.</p>
             </article>
 
             <article class="decision-card">
               <span class="card-label">Decision 04</span>
-              <h3>Official data only — no UGC</h3>
-              <p>No community spots, no tips, no ratings. The product's value proposition is reliability and official accuracy, not engagement or social features.</p>
+              <h3>Territories administer their own zones</h3>
+              <p>A resort, a park or an intercommunality can moderate the points created on its territory, draw its own perimeters and state what is tolerated, restricted or forbidden inside them. This is the feature that makes the product institutionally acceptable. Bivouac gives managers a channel to carry their own rule to a visitor who does not read the local press.</p>
+              <p class="card-cost"><strong>Cost:</strong> a second product surface to design and maintain, plus a partnership process before any territory joins.</p>
+            </article>
+
+            <article class="decision-card">
+              <span class="card-label">Decision 05</span>
+              <h3>Educational orientation, never legal authorisation</h3>
+              <p>The product helps someone make a better decision and stops short of granting permission. That line runs through the wording of every regulatory card, and the responsibility to check conditions on site stays with the user. Overstating what the platform guarantees would have cost the institutional credibility the whole model depends on.</p>
+              <p class="card-cost"><strong>Cost:</strong> copy that has to stay precise, reviewed line by line.</p>
             </article>
           </div>
 
-          <div class="figure-grid" style="margin-top: 48px;">
+          <div class="figure-grid figure-grid--05" style="margin-top: 48px;">
             <figure>
-              <div class="img-placeholder" data-id="IMAGE_04a" style="aspect-ratio: 9/16;">
-                IMAGE_04a — Regulation layer screen (core UI)
-              </div>
-              <figcaption>Bivouac app — regulation layer on map, zone detail panel</figcaption>
+              <img class="figure-image" data-id="IMAGE_05a" src="../assets/build/BIVOUAC/IMAGE_05a-regulated-zone-detail.jpeg" alt="Bivouac application, detail panel of a regulated zone showing restrictions and the official source">
+              <figcaption>Bivouac application, detail panel of a regulated zone showing restrictions and the official source</figcaption>
             </figure>
             <figure>
-              <div class="img-placeholder" data-id="IMAGE_04b" style="aspect-ratio: 9/16;">
-                IMAGE_04b — Design iteration / second key screen
-              </div>
-              <figcaption>Bivouac app — design iteration, information architecture</figcaption>
+              <img class="figure-image" data-id="IMAGE_05b" src="../assets/build/BIVOUAC/IMAGE_05b-water-status.png" alt="Bivouac application, bivouac point detail with computed water proximity and community reports">
+              <figcaption>Bivouac application, bivouac point detail with computed water proximity and community reports</figcaption>
             </figure>
           </div>
+
+          <figure style="margin-top: 20px;">
+            <img class="figure-image" data-id="IMAGE_05c" src="../assets/build/BIVOUAC/IMAGE_05c-territorial-admin.png" alt="Bivouac administration interface used by land managers to define their own regulated zones">
+            <figcaption>Bivouac administration interface used by land managers to define their own regulated zones</figcaption>
+          </figure>
         </section>
 
         <hr class="section-divider">
 
-        <!-- ── Section 06 — Project evolution ── -->
-        <section id="evolution" aria-labelledby="evolution-heading" class="section-content">
-          <h2 id="evolution-heading" class="section-heading">From master's thesis to vibe coding experiment</h2>
+        <!-- ── Section 06 — Process: from design-first POC to a live V1 ── -->
+        <section id="process" aria-labelledby="process-heading" class="section-content">
+          <h2 id="process-heading" class="section-heading">Process: from design-first POC to a live V1</h2>
 
           <div class="evolution-text">
-            <p class="body-text">This project has gone through three distinct lives.</p>
-            <p class="body-text">It started in 2018 as a master's thesis — a structured research exercise that shaped the product's ethical framing and surfaced the core tension between engagement logic and responsible outdoor practice. That work was rigorous but static: a design that existed on paper, never tested in the wild.</p>
-            <p class="body-text">It then sat dormant for years. That's not a failure — it's a common fate for academic work that was ahead of its tooling.</p>
-            <p class="body-text">In 2023, Bivouac was revived as a design exploration. The initial research had aged well; the product direction needed grounding. That phase produced the Figma prototype visible throughout this page.</p>
-            <p class="body-text">Most recently, the project became a testing ground for a different kind of question: how far can a designer push product development without traditional engineering resources? Using Figma Make, the project moved from static prototyping toward something closer to a testable, near-production interface. Not as a demo — as a form of pre-industrialization work that reduces uncertainty before engineering gets involved.</p>
-            <p class="body-text">At Camptocamp, this approach has become part of how R&amp;D exploration is structured: using vibe coding tools to validate product directions earlier, with less friction, and with a tighter feedback loop between design intent and built behavior.</p>
+            <p class="body-text">The 2018 thesis produced solid framing and a design that only existed on paper. The project then sat still for years, which happens to academic work that arrives ahead of its tooling.</p>
+            <p class="body-text">What changed recently is the technical context. AI-assisted prototyping made it realistic to build something dynamic enough to hold real data, real interactions and part of the system logic, without committing to a full development effort first. I reopened the project as a design-first POC with an explicit brief: test whether the product model holds, and leave the visual polish for later.</p>
+            <p class="body-text">The POC earned its keep. It converted water reporting from a contribution feature into computed data, separated the three families of information, and surfaced the governance question that eight years of static mockups had kept hidden. It also answered the question that matters before industrialising anything, which is whether the system the product proposes to create deserves to exist at all.</p>
+            <p class="body-text">The V1 that followed is a real application. Next.js and TypeScript on the front, Supabase for data and edge functions, OpenStreetMap and INPN as sources, and a completed external code audit. Authentication, GDPR compliance and hosting decisions sit between the current state and a full launch, and I would rather say so than dress the project up.</p>
+            <p class="body-text">The sequence is the part I would defend in any design conversation. Design, exploratory prototype, clarified model, then development. Moving uncertainty earlier is cheaper than discovering it mid-sprint, and it widens what a proof of concept is for. The question stops at technical feasibility in the old model. Here it extended to coherence, comprehensibility and relevance.</p>
           </div>
 
           <figure style="margin-top: 48px;">
-            <div class="img-placeholder" data-id="IMAGE_05" style="aspect-ratio: 16/7;">
-              IMAGE_05 — Three-phase comparison
-            </div>
-            <figcaption>Bivouac across three phases: 2018 thesis prototype · 2023 Figma redesign · 2025–2026 Figma Make exploration</figcaption>
+            <img class="figure-image" data-id="IMAGE_06" src="../assets/build/BIVOUAC/IMAGE_06-winter-view.png" alt="Bivouac application, winter view with the slope layer, a spot marked for winter conditions, and the nearest nivose reading">
+            <figcaption>Bivouac application, winter view with the slope layer, a spot marked for winter conditions, and the nearest nivose reading</figcaption>
           </figure>
         </section>
 
         <hr class="section-divider">
 
-        <!-- ── Section 07 — Outcome & reflections ── -->
+        <!-- ── Section 07 — Outcome and reflections ── -->
         <section id="outcome" aria-labelledby="outcome-heading" class="section-content">
-          <h2 id="outcome-heading" class="section-heading">Outcome &amp; reflections</h2>
+          <h2 id="outcome-heading" class="section-heading">Outcome and reflections</h2>
 
-          <p class="body-text">Bivouac is not a finished product. It is a design argument — that responsible product thinking starts before the first wireframe, in the choice of what not to build.</p>
-          <p class="body-text">The project also reflects a broader shift in design practice: as prototyping tools gain the ability to produce testable, near-production interfaces, the boundary between design and engineering becomes a design decision in itself. Bivouac is one attempt to explore what that boundary looks like in practice.</p>
+          <p class="body-text">Bivouac is online at bivouaquer.fr, hosted by a non-profit association so that regulatory information stays free to access. Conversations are open with a national park, a conservatory of natural areas, a national federation and a département, and a first funding application has been submitted.</p>
 
-          <ul class="tags" style="margin-top: 28px;" aria-label="Key learnings">
-            <li>Product ethics before features</li>
-            <li>Official data over UGC</li>
-            <li>Prototyping as pre-industrialization</li>
-            <li>Vibe coding as design exploration</li>
+          <span class="section-label" style="margin-top: 28px;">What this project sharpened in my practice</span>
+          <p class="body-text">Products that display public information are governance objects first. A large share of the design work went into deciding who is allowed to say what, and that skill transfers directly to any domain with regulatory or institutional stakeholders.</p>
+          <p class="body-text">Naming the nature of each piece of data proved more useful than any feature prioritisation exercise. It gave the team of one a rule for resolving conflicts, and it gave institutional contacts a reason to trust the display.</p>
+          <p class="body-text">National scope worked as a design constraint rather than an ambition. Community knowledge only becomes credible when the map stops at no arbitrary boundary, which is why I turned down the safer pilot-territory framing when it was suggested.</p>
+
+          <span class="section-label" style="margin-top: 28px;">What I would do differently</span>
+          <p class="body-text">I would run the institutional conversations earlier. The governance model was reconstructed from documents and reading before I started talking to the people concerned, and a few of those exchanges would have saved months of design hypothesis.</p>
+
+          <ul class="tags" style="margin-top: 28px;" aria-label="Key takeaways">
+            <li>Live V1, run under a non-profit model</li>
+            <li>Three-layer data model: institutional, computed, empirical</li>
+            <li>Territorial administration as the governance mechanism</li>
+            <li>Contribution without promotion</li>
+            <li>Design-first POC as a way to de-risk before development</li>
             <li>Responsibility as a product constraint</li>
           </ul>
 
-          <figure style="margin-top: 40px;">
-            <div class="img-placeholder" data-id="IMAGE_06" style="aspect-ratio: 16/9;">
-              IMAGE_06 — Prototype in context / device mockup
-            </div>
-          </figure>
+          <div class="figure-grid" style="margin-top: 40px;">
+            <figure>
+              <img class="figure-image figure-image--compact" data-id="IMAGE_07a" src="../assets/build/BIVOUAC/IMAGE_07a-spot-view.jpeg" alt="Bivouac application on mobile, detail view of a spot">
+              <figcaption>Bivouac application on mobile, detail view of a spot</figcaption>
+            </figure>
+            <figure>
+              <img class="figure-image figure-image--compact" data-id="IMAGE_07b" src="../assets/build/BIVOUAC/IMAGE_07b-photo-detail.jpeg" alt="Bivouac application on mobile, full-screen photo of the spot with the pitch area outlined">
+              <figcaption>Bivouac application on mobile, full-screen photo of the spot with the pitch area outlined</figcaption>
+            </figure>
+          </div>
 
         </section>
 
@@ -1066,6 +1303,58 @@
     </footer>
 
   </div>
+
+  <!-- ── Fullscreen image lightbox ── -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    (function () {
+      var overlay = document.getElementById('lightbox');
+      var overlayImg = document.getElementById('lightbox-img');
+      var closeBtn = overlay.querySelector('.lightbox-close');
+
+      function openLightbox(img) {
+        overlayImg.src = img.src;
+        overlayImg.alt = img.alt;
+        overlay.classList.add('is-active');
+        overlay.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeLightbox() {
+        overlay.classList.remove('is-active');
+        overlay.setAttribute('aria-hidden', 'true');
+        overlayImg.src = '';
+      }
+
+      document.querySelectorAll('.figure-image').forEach(function (img) {
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', 'View full screen: ' + img.alt);
+        img.addEventListener('click', function () { openLightbox(img); });
+        img.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(img);
+          }
+        });
+      });
+
+      overlay.addEventListener('click', closeLightbox);
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('is-active')) {
+          closeLightbox();
+        }
+      });
+    })();
+  </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () { initLavaWebGL(); });
     window.addEventListener('load', initLavaWebGL);
@@ -1195,221 +1484,6 @@
 
         var program = createProgram(gl, vertexSource, fragmentSource);
         if (!program) { return; }
-
-        var positionBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER,
-          new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]),
-          gl.STATIC_DRAW);
-
-        var aPosition   = gl.getAttribLocation(program, 'a_position');
-        var uResolution = gl.getUniformLocation(program, 'u_resolution');
-        var uTime       = gl.getUniformLocation(program, 'u_time');
-        var uMouse      = gl.getUniformLocation(program, 'u_mouse');
-        var uSeed       = gl.getUniformLocation(program, 'u_seed');
-
-        var mouseX = 0.5, mouseY = 0.5;
-        var targetMouseX = 0.5, targetMouseY = 0.5;
-        var seed = (index + 1) * 0.173;
-
-        figure.addEventListener('mousemove', function (e) {
-          var rect = figure.getBoundingClientRect();
-          targetMouseX = (e.clientX - rect.left) / rect.width;
-          targetMouseY = 1.0 - ((e.clientY - rect.top) / rect.height);
-        });
-        figure.addEventListener('mouseleave', function () {
-          targetMouseX = 0.5; targetMouseY = 0.5;
-        });
-
-        function render(now) {
-          resizeCanvas(canvas, gl);
-          gl.viewport(0, 0, canvas.width, canvas.height);
-          mouseX += (targetMouseX - mouseX) * 0.08;
-          mouseY += (targetMouseY - mouseY) * 0.08;
-          gl.clearColor(0, 0, 0, 0);
-          gl.clear(gl.COLOR_BUFFER_BIT);
-          gl.useProgram(program);
-          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-          gl.enableVertexAttribArray(aPosition);
-          gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-          gl.uniform2f(uResolution, canvas.width, canvas.height);
-          gl.uniform1f(uTime, now * 0.001);
-          gl.uniform2f(uMouse, mouseX, mouseY);
-          gl.uniform1f(uSeed, seed);
-          gl.drawArrays(gl.TRIANGLES, 0, 6);
-          requestAnimationFrame(render);
-        }
-        requestAnimationFrame(render);
-      });
-    }
-
-    function resizeCanvas(canvas, gl) {
-      var rect = canvas.getBoundingClientRect();
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var width  = Math.max(1, Math.round(rect.width  * dpr));
-      var height = Math.max(1, Math.round(rect.height * dpr));
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width; canvas.height = height;
-      }
-    }
-
-    function createShader(gl, type, source) {
-      var shader = gl.createShader(type);
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error(gl.getShaderInfoLog(shader));
-        gl.deleteShader(shader);
-        return null;
-      }
-      return shader;
-    }
-
-    function createProgram(gl, vertexSource, fragmentSource) {
-      var vs = createShader(gl, gl.VERTEX_SHADER, vertexSource);
-      var fs = createShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
-      if (!vs || !fs) return null;
-      var program = gl.createProgram();
-      gl.attachShader(program, vs);
-      gl.attachShader(program, fs);
-      gl.linkProgram(program);
-      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error(gl.getProgramInfoLog(program));
-        gl.deleteProgram(program);
-        return null;
-      }
-      return program;
-    }
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () { initLavaWebGL(); });
-    window.addEventListener('load', initLavaWebGL);
-    setTimeout(initLavaWebGL, 800);
-
-    function initLavaWebGL() {
-      var figures = document.querySelectorAll('figure.project-figure');
-
-      figures.forEach(function (figure, index) {
-        if (figure.dataset.webglLavaReady === '1') return;
-        figure.dataset.webglLavaReady = '1';
-
-        figure.style.setProperty('--mx', '50%');
-        figure.style.setProperty('--my', '50%');
-
-        var canvas = document.createElement('canvas');
-        canvas.className = 'lava-canvas';
-        figure.insertBefore(canvas, figure.firstChild);
-
-        var gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false }) ||
-                 canvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
-
-        if (!gl) { console.warn('WebGL non disponible'); return; }
-
-        var vertexSource = [
-          'attribute vec2 a_position;',
-          'varying vec2 v_uv;',
-          'void main() {',
-          '  v_uv = a_position * 0.5 + 0.5;',
-          '  gl_Position = vec4(a_position, 0.0, 1.0);',
-          '}'
-        ].join('');
-
-        var fragmentSource = [
-          'precision mediump float;',
-          'varying vec2 v_uv;',
-          'uniform vec2 u_resolution;',
-          'uniform float u_time;',
-          'uniform vec2 u_mouse;',
-          'uniform float u_seed;',
-
-          'vec3 palette(float t) {',
-          '  vec3 c1 = vec3(0.01, 0.05, 0.16);',
-          '  vec3 c2 = vec3(0.02, 0.18, 0.45);',
-          '  vec3 c3 = vec3(0.20, 0.42, 0.90);',
-          '  vec3 c4 = vec3(0.82, 0.10, 0.82);',
-          '  vec3 c5 = vec3(0.45, 0.78, 1.00);',
-          '  vec3 col = mix(c1, c2, smoothstep(0.0, 0.2, t));',
-          '  col = mix(col, c3, smoothstep(0.18, 0.5, t));',
-          '  col = mix(col, c4, smoothstep(0.45, 0.75, t));',
-          '  col = mix(col, c5, smoothstep(0.72, 1.0, t));',
-          '  return col;',
-          '}',
-
-          'float metaball(vec2 p, vec2 c, float r) {',
-          '  float d = length(p - c);',
-          '  return exp(-d*d / (r*r));',
-          '}',
-
-          'float lava(vec2 p, float t, vec2 mouse) {',
-          '  vec2 c1 = vec2(sin(t*1.05), cos(t*0.92)) * vec2(0.15,0.10);',
-          '  vec2 c2 = vec2(cos(t*0.82+1.2), sin(t*1.18+0.4)) * vec2(0.13,0.12);',
-          '  vec2 c3 = vec2(sin(t*1.28+2.1), cos(t*1.04+2.6)) * vec2(0.12,0.13);',
-          '  vec2 c4 = vec2(cos(t*0.88+3.2), sin(t*1.16+1.8)) * vec2(0.10,0.09);',
-          '  vec2 c5 = vec2(sin(t*0.72+4.4), cos(t*0.84+0.9)) * vec2(0.09,0.08);',
-          '  vec2 c6 = mouse * 0.8;',
-          '  float f = 0.0;',
-          '  f += metaball(p,c1,0.18);',
-          '  f += metaball(p,c2,0.17);',
-          '  f += metaball(p,c3,0.16);',
-          '  f += metaball(p,c4,0.14);',
-          '  f += metaball(p,c5,0.13);',
-          '  f += metaball(p,c6,0.14);',
-          '  return f;',
-          '}',
-
-          'void main() {',
-          '  vec2 uv = v_uv;',
-          '  vec2 p = uv - 0.5;',
-          '  p.x *= u_resolution.x / max(u_resolution.y, 1.0);',
-          '  float t = u_time * 0.38 + u_seed * 5.7;',
-          '  vec2 mouse = u_mouse - 0.5;',
-          '  mouse.x *= u_resolution.x / max(u_resolution.y, 1.0);',
-          '  float field = lava(p, t, mouse);',
-          '  float eps = 0.008;',
-          '  float dx = lava(p + vec2(eps, 0.0), t, mouse) - lava(p - vec2(eps, 0.0), t, mouse);',
-          '  float dy = lava(p + vec2(0.0, eps), t, mouse) - lava(p - vec2(0.0, eps), t, mouse);',
-          '  vec2 grad = vec2(dx, dy) * 0.5;',
-          '  vec2 warp = grad * 1.35;',
-          '  vec2 q = p + warp;',
-          '  float flow = sin(q.x * 4.0 + t * 1.3);',
-          '  flow += sin(q.y * 4.6 - t * 1.15);',
-          '  flow += sin((q.x + q.y) * 3.1 + t * 0.9);',
-          '  flow /= 3.0;',
-          '  flow = flow * 0.5 + 0.5;',
-          '  flow = pow(flow, 1.35);',
-          '  float micro = sin(q.x * 18.0 + t * 2.4) * sin(q.y * 18.0 - t * 2.1);',
-          '  micro = micro * 0.5 + 0.5;',
-          '  float rings = sin((field * 0.1 + flow * 0.05 - micro * 2.0) * 6.28318);',
-          '  rings = rings * 0.5 + 0.5;',
-          '  float sheen = flow * 0.92 + micro * 0.05 + rings * 0.05;',
-          '  vec2 ca = normalize(grad + vec2(0.0001)) * 0.09;',
-          '  float rField = clamp(lava(p + ca, t, mouse), 0.0, 1.0);',
-          '  float gField = clamp(field, 0.0, 1.0);',
-          '  float bField = clamp(lava(p - ca, t, mouse), 0.0, 1.0);',
-          '  float rMix = clamp(gField * 0.45 + sheen * 0.95 + rField * 0.25, 0.0, 1.0);',
-          '  float gMix = clamp(gField * 0.55 + sheen * 0.75, 0.0, 1.0);',
-          '  float bMix = clamp(gField * 0.40 + sheen * 1.05 + bField * 0.25, 0.0, 1.0);',
-          '  vec3 colR = palette(rMix);',
-          '  vec3 colG = palette(gMix);',
-          '  vec3 colB = palette(bMix);',
-          '  vec3 color = vec3(colR.r, colG.g, colB.b);',
-          '  float mask = smoothstep(0.42, 0.92, field);',
-          '  float edge = smoothstep(0.55, 1.05, field) - smoothstep(1.05, 1.45, field);',
-          '  float glow = edge * 0.22;',
-          '  vec3 normal = normalize(vec3(grad, 0.95));',
-          '  vec3 lightDir = normalize(vec3(-0.25, 0.45, 1.0));',
-          '  float lighting = clamp(dot(normal, lightDir), 0.0, 1.0);',
-          '  float spec = pow(clamp(dot(normal, normalize(lightDir + vec3(0.0, 0.0, 1.0))), 0.0, 1.0), 18.0);',
-          '  vec3 specCol = vec3(0.51, 0.88, 1.0) * spec * 0.28;',
-          '  vec3 base = color * (0.62 + lighting * 0.28);',
-          '  vec3 finalColor = base * (mask + glow) + specCol * mask;',
-          '  float alpha = clamp(mask * 0.88, 0.0, 0.82);',
-          '  gl_FragColor = vec4(finalColor, alpha);',
-          '}'
-        ].join('\n');
-
-        var program = createProgram(gl, vertexSource, fragmentSource);
-        if (!program) { console.warn('Shader WebGL non compilé'); return; }
 
         var positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
